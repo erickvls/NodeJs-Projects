@@ -7,17 +7,27 @@ const cotacao = (symbol,callback) =>{
 
     request({url:url,json:true}, (err,response) =>{
         const parsedJSON = response.body
+
         if(err){
-           throw new Error('Something went wrong')
-        }else if(parsedJSON.data === undefined){
-            throw new Error('asdasd')
+            const error = {
+                message : 'No data found'
+            }
+            return callback(null,error)
         }
+        
+        if(parsedJSON.data === undefined){
+            const error = {
+                message : 'No data found'
+            }
+            return callback(null,error)
+        }
+
         const data = {
             symbol: parsedJSON.data[0].symbol,
             price: parsedJSON.data[0].price,
             description: parsedJSON.data[0].name
         }
-      callback(data)
+        callback(data,null)
     })
 
 }

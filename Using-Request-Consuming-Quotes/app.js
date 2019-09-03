@@ -1,5 +1,7 @@
 const cotacao = require('./ultil/cotacao')
 
 
-console.log(cotacao('PETR4.SA'));
+cotacao('PETR4.SA', (data) => {
+    console.log(data);
+});
 
